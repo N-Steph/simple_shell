@@ -1,0 +1,4 @@
+#!/bin/bash
+read CINFILE
+read COUTFILE
+gcc -Wall -Werror -Wextra -pedantic $CINFILE -o $COUTFILE 
