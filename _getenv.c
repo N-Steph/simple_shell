@@ -26,8 +26,8 @@ char *_getenv(const char *name)
 		i++;
 	}
 	if (environ[i] == NULL)
-		return NULL;
+		return (NULL);
 	result_value = environ[i];
 	result_value += (len_of_name + 1);
 	return (result_value);
-}	
+}
