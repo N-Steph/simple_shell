@@ -14,6 +14,8 @@ char *_getenv(const char *name)
 	int len_of_name, i, cmp_result;
 	char *result_value;
 
+	if (name == NULL)
+		return (NULL);
 	len_of_name = _strlen(name);
 	i = 0;
 	while (environ[i] != NULL)
