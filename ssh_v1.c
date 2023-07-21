@@ -4,9 +4,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
+extern char **environ;
 
 /**
  * main - super simple shell
+ * @ac: argument count
+ * @argv: argument vector
+ * @env: environment variables
  *
  * Return: Always 0
  */
@@ -33,10 +38,12 @@ int main(void)
 		my_pid = fork();
 		if (my_pid == 0)
 		{
-			if (execve(argv[0], argv, NULL) == -1)
+			if (execve(argv[0], argv, environ) == -1)
 			{
+				printf("%s : %d :", __FILE__, errno);
+				fflush(stdout);
+				perror(argv[0]);
 				free(lineptr);
-				perror("Error:");
 				return (1);
 			}
 		}
