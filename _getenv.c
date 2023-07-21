@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
+extern char **environ;
 /**
  * _getenv - gets an environment variable
  * @name: name of variable
@@ -10,7 +11,6 @@
  */
 char *_getenv(const char *name)
 {
-	extern char **environ;
 	int len_of_name, i, cmp_result;
 	char *result_value;
 
