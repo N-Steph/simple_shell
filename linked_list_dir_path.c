@@ -6,11 +6,11 @@
 /**
  * linked_list_dir_path - creates a linked list of PATH directories
  *
- * Returns: pointer to first node of linked list 
+ * Return: pointer to first node of linked list
  */
 struct dir_node *linked_list_dir_path(void)
 {
-	/* note that this linked list is node freed */
+	/* note that this linked list is not freed */
 	char *value, *token;
 	struct dir_node *head, *prev_node, *next_node;
 
@@ -38,5 +38,5 @@ struct dir_node *linked_list_dir_path(void)
 		}
 		token = strtok(NULL, ":");
 	}
-	return head;
+	return (head);
 }
