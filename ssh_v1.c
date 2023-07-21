@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
 /**
  * main - super simple shell
@@ -21,7 +22,11 @@ int main(void)
 	while (1)
 	{
 		printf("$cisfun$ ");
-		getline(&lineptr, &n, stdin);
+		if (getline(&lineptr, &n, stdin) == -1)
+		{
+			free(lineptr);
+			break;
+		}
 		token = strtok(lineptr, "\n");
 		argv[0] = token;
 		argv[1] = NULL;
@@ -30,6 +35,7 @@ int main(void)
 		{
 			if (execve(argv[0], argv, NULL) == -1)
 			{
+				free(lineptr);
 				perror("Error:");
 				return (1);
 			}
