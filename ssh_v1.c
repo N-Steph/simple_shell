@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-#include <errno.h>
-extern char **environ;
+#include "main.h"
 
 /**
  * main - super simple shell
@@ -17,12 +10,10 @@ extern char **environ;
  */
 int main(void)
 {
-	char *lineptr = NULL;
+	char *lineptr = NULL, *argv[10];
 	size_t n = 0;
 	pid_t my_pid;
 	int status;
-	char *token;
-	char *argv[2];
 
 	while (1)
 	{
@@ -32,9 +23,7 @@ int main(void)
 			free(lineptr);
 			break;
 		}
-		token = strtok(lineptr, "\n");
-		argv[0] = token;
-		argv[1] = NULL;
+		handle_args(&lineptr, argv);
 		my_pid = fork();
 		if (my_pid == 0)
 		{
