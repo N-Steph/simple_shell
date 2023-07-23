@@ -1,7 +1,4 @@
 #include "main.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * linked_list_dir_path - creates a linked list of PATH directories
@@ -11,11 +8,15 @@
 struct dir_node *linked_list_dir_path(void)
 {
 	/* note that this linked list is not freed */
-	char *value, *token;
+	char *value, *token, *new_value;
 	struct dir_node *head, *prev_node, *next_node;
 
 	value = _getenv("PATH");
-	token = strtok(value, ":");
+	new_value = malloc(sizeof(char) * (strlen(value) + 1));
+	if (new_value == NULL)
+		return (NULL);
+	new_value = strcpy(new_value, value);
+	token = strtok(new_value, ":");
 	head = NULL;
 	while (token != NULL)
 	{
