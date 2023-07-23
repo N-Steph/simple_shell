@@ -13,7 +13,7 @@ int main(void)
 	char *lineptr = NULL, *argv[10];
 	size_t n = 0;
 	pid_t my_pid;
-	int status;
+	int status, i;
 
 	while (1)
 	{
@@ -24,6 +24,14 @@ int main(void)
 			break;
 		}
 		handle_args(&lineptr, argv);
+		i = handle_path(argv);
+		if (i == -1)
+		{
+			printf("%s : %d :", __FILE__, errno);
+			fflush(stdout);
+			perror(argv[0]);
+			continue;
+		}
 		my_pid = fork();
 		if (my_pid == 0)
 		{
@@ -39,6 +47,8 @@ int main(void)
 		else
 		{
 			wait(&status);
+			if (i == 0)
+				free(argv[0]);
 		}
 	}
 	return (0);
