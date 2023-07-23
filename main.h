@@ -21,4 +21,6 @@ void handle_args(char **lineptr, char **agrs);
 int handle_path(char **agrs);
 struct dir_node *linked_list_dir_path(void);
 void free_list(struct dir_node *head);
+void built_in(char **args, char *lineptr);
+void _printenv(void);
 #endif /* MAIN_H */
