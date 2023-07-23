@@ -1,8 +1,5 @@
 #include "main.h"
-#include <string.h>
-#include <stdio.h>
 
-extern char **environ;
 /**
  * _getenv - gets an environment variable
  * @name: name of variable
@@ -16,7 +13,7 @@ char *_getenv(const char *name)
 
 	if (name == NULL)
 		return (NULL);
-	len_of_name = _strlen(name);
+	len_of_name = strlen(name);
 	i = 0;
 	while (environ[i] != NULL)
 	{
