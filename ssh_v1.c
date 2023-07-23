@@ -24,12 +24,11 @@ int main(void)
 			break;
 		}
 		handle_args(&lineptr, argv);
+		built_in(argv, lineptr);
 		i = handle_path(argv);
 		if (i == -1)
 		{
-			printf("%s : %d :", __FILE__, errno);
-			fflush(stdout);
-			perror(argv[0]);
+			print_error_msg(argv);
 			continue;
 		}
 		my_pid = fork();
@@ -37,9 +36,7 @@ int main(void)
 		{
 			if (execve(argv[0], argv, environ) == -1)
 			{
-				printf("%s : %d :", __FILE__, errno);
-				fflush(stdout);
-				perror(argv[0]);
+				print_error_msg(argv);
 				free(lineptr);
 				return (1);
 			}
@@ -52,4 +49,17 @@ int main(void)
 		}
 	}
 	return (0);
+}
+
+/**
+ * print_error_msg - prints erro message when wrong command
+ * @argv: array of argument
+ *
+ * Return: nothing
+ */
+void print_error_msg(char **argv)
+{
+	printf("%s : %d : ", __FILE__, errno);
+	fflush(stdout);
+	perror(argv[0]);
 }
