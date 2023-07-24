@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <signal.h>
 extern char **environ;
 int _strlen(const char *s);
 void print_dir_path(void);
@@ -24,4 +25,5 @@ void free_list(struct dir_node *head);
 void built_in(char **args, char *lineptr);
 void _printenv(void);
 void print_error_msg(char **argv);
+int interactive_mode(char **lineptr, char **argv);
 #endif /* MAIN_H */
