@@ -27,7 +27,9 @@ int handle_path(char **args)
 			mem = malloc(sizeof(char) * (strlen(node->dir) + strlen(args[0]) + 2));
 			if (mem == NULL)
 				return (-1);
-			mem = memcpy(mem, node->dir, strlen(node->dir));
+			mem = memset(mem, 'x', (strlen(node->dir) + strlen(args[0]) + 2));
+			mem = strcpy(mem, node->dir);
+			/*mem = memcpy(mem, node->dir, strlen(node->dir));*/
 			mem = strcat(mem, "/");
 			mem = strcat(mem, args[0]);
 			if (stat(mem, &statbuf) == 0)
