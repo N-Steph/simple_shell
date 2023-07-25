@@ -3,8 +3,7 @@
 /**
  * main - super simple shell
  * @ac: argument count
- * @argv: argument vector
- * @env: environment variables
+ * @av: argument vector
  *
  * Return: Always 0
  */
@@ -12,7 +11,7 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused)) **av)
 {
 	char *lineptr = NULL, *argv[10];
 	size_t n = 0;
-	int i;
+	int output_num = 1;
 
 	signal(SIGINT, SIG_IGN);
 	while (1)
@@ -27,10 +26,12 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused)) **av)
 			break;
 		}
 		if (strcmp(lineptr, "\n") == 0)
+		{
+			++output_num;
 			continue;
-		i = interactive_mode(&lineptr, argv);
-		if (i == 2)
-			continue;
+		}
+		interactive_mode(&lineptr, argv, &output_num);
+		++output_num;
 	}
 	return (0);
 }
@@ -40,9 +41,9 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused)) **av)
  * @lineptr: address of pointer containing buffer of command read by getline()
  * @argv: array of argument
  *
- * Return: -1 (argument does not exist)
+ * Return: nothing 
  */
-int interactive_mode(char **lineptr, char **argv)
+void interactive_mode(char **lineptr, char **argv, int *output_num)
 {
 	pid_t my_pid;
 	int status, i;
@@ -52,17 +53,17 @@ int interactive_mode(char **lineptr, char **argv)
 	i = handle_path(argv);
 	if (i == -1)
 	{
-		print_error_msg(argv);
-		return (1);
+		print_error_msg(argv, output_num);
+		return;
 	}
 	my_pid = fork();
 	if (my_pid == 0)
 	{
 		if (execve(argv[0], argv, environ) == -1)
 		{
-			print_error_msg(argv);
+			print_error_msg(argv, output_num);
 			free(*lineptr);
-			return (-1);
+			return;
 		}
 	}
 	else
@@ -71,7 +72,7 @@ int interactive_mode(char **lineptr, char **argv)
 		if (i == 0)
 			free(argv[0]);
 	}
-	return (0);
+	return;
 }
 
 /**
@@ -80,9 +81,9 @@ int interactive_mode(char **lineptr, char **argv)
  *
  * Return: nothing
  */
-void print_error_msg(char **argv)
+void print_error_msg(char **argv, int *output_num)
 {
-	printf("%s : %d : ", __FILE__, errno);
+	printf("hsh : %d : ", *output_num);
 	fflush(stdout);
 	perror(argv[0]);
 }
