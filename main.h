@@ -24,6 +24,6 @@ struct dir_node *linked_list_dir_path(void);
 void free_list(struct dir_node *head);
 void built_in(char **args, char *lineptr);
 void _printenv(void);
-void print_error_msg(char **argv);
-int interactive_mode(char **lineptr, char **argv);
+void print_error_msg(char **argv, int *output_num);
+void interactive_mode(char **lineptr, char **argv, int *output_num);
 #endif /* MAIN_H */
