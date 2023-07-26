@@ -22,7 +22,7 @@ void handle_args(char **lineptr, char **agrs);
 int handle_path(char **agrs);
 struct dir_node *linked_list_dir_path(void);
 void free_list(struct dir_node *head);
-void built_in(char **args, char *lineptr);
+int built_in(char **args, char *lineptr);
 void _printenv(void);
 void print_error_msg(char **argv, int *output_num);
 void interactive_mode(char **lineptr, char **argv, int *output_num);
