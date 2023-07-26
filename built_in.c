@@ -6,9 +6,9 @@
  * @args: array of arguments
  * @lineptr: pointer to buffer of argument read by getline()
  *
- * Return: nothing
+ * Return: -1 (failure) 
  */
-void built_in(char **args, char *lineptr)
+int built_in(char **args, char *lineptr)
 {
 	char *cmd_built_in[4] = {"exit", "env", "setenv", "unsetenv"};
 	int status;
@@ -26,8 +26,9 @@ void built_in(char **args, char *lineptr)
 			if (status == 0)
 			{
 				printf("hsh : 1 : Illegal number : %s\n", args[1]);
-				free(lineptr);
-				exit(2);
+				return (-1);
+				/*free(lineptr);*/
+				/*exit(2);*/
 			}
 			free(lineptr);
 			exit(status);
@@ -35,6 +36,9 @@ void built_in(char **args, char *lineptr)
 	}
 	else if (strcmp(args[0], cmd_built_in[1]) == 0)
 	{
-		_printenv();
+		/* How do I handle when env is given an argument */
+		return (0);
+		/*_printenv();*/
 	}
+	return (0);
 }
