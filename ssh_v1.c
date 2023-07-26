@@ -53,10 +53,9 @@ void interactive_mode(char **lineptr, char **argv, int *output_num)
 	i = built_in(argv, *lineptr);
 	if (i == -1)
 		return;
-	i = handle_path(argv);
+	i = handle_path(argv, output_num);
 	if (i == -1)
 	{
-		print_error_msg(argv, output_num);
 		return;
 	}
 	my_pid = fork();
