@@ -30,7 +30,6 @@ int handle_path(char **args, int *output_num)
 				return (-1);
 			mem = memset(mem, 'x', (strlen(node->dir) + strlen(args[0]) + 2));
 			mem = strcpy(mem, node->dir);
-			/*mem = memcpy(mem, node->dir, strlen(node->dir));*/
 			mem = strcat(mem, "/");
 			mem = strcat(mem, args[0]);
 			if (stat(mem, &statbuf) == 0)
@@ -50,6 +49,6 @@ int handle_path(char **args, int *output_num)
 	{
 		return (1);
 	}
-	printf("hsh : %d : %s : not found\n", *output_num, args[0]);
+	printf("hsh: %d: %s: not found\n", *output_num, args[0]);
 	return (-1);
 }

@@ -48,7 +48,9 @@ void interactive_mode(char **lineptr, char **argv, int *output_num)
 {
 	pid_t my_pid;
 	int status, i;
+	char *in_command;
 
+	in_command = argv[0];
 	handle_args(lineptr, argv);
 	i = built_in(argv, *lineptr);
 	if (i == -1)
@@ -63,7 +65,7 @@ void interactive_mode(char **lineptr, char **argv, int *output_num)
 	{
 		if (execve(argv[0], argv, environ) == -1)
 		{
-			print_error_msg(argv, output_num);
+			print_error_msg(in_command, output_num);
 			free(*lineptr);
 			return;
 		}
@@ -78,14 +80,14 @@ void interactive_mode(char **lineptr, char **argv, int *output_num)
 
 /**
  * print_error_msg - prints erro message when wrong command
- * @argv: array of argument
+ * @in_command: pointer to command passed through terminal
  * @output_num: pointer to variable storing the number of command executed
  *
  * Return: nothing
  */
-void print_error_msg(char **argv, int *output_num)
+void print_error_msg(char *in_command, int *output_num)
 {
 	printf("hsh : %d : ", *output_num);
 	fflush(stdout);
-	perror(argv[0]);
+	perror(in_command);
 }
