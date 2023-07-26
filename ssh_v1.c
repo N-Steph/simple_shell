@@ -40,8 +40,9 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused)) **av)
  * interactive_mode - execute shell in interactive mode
  * @lineptr: address of pointer containing buffer of command read by getline()
  * @argv: array of argument
+ * @output_num: pointer to number storing number of commands executed
  *
- * Return: nothing 
+ * Return: nothing
  */
 void interactive_mode(char **lineptr, char **argv, int *output_num)
 {
@@ -72,12 +73,12 @@ void interactive_mode(char **lineptr, char **argv, int *output_num)
 		if (i == 0)
 			free(argv[0]);
 	}
-	return;
 }
 
 /**
  * print_error_msg - prints erro message when wrong command
  * @argv: array of argument
+ * @output_num: pointer to number storing number of commans executed
  *
  * Return: nothing
  */
