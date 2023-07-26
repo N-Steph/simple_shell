@@ -6,10 +6,11 @@
  * a command
  *
  * @args: array of arguments
+ * @output_num: command number
  *
  * Return: 0 (success), -1 (failure), 1(Success, full path passed)
  */
-int handle_path(char **args)
+int handle_path(char **args, int *output_num)
 {
 	struct stat statbuf;
 	struct dir_node *node, *head;
@@ -49,5 +50,6 @@ int handle_path(char **args)
 	{
 		return (1);
 	}
+	printf("hsh : %d : %s : not found\n", *output_num, args[0]);
 	return (-1);
 }
