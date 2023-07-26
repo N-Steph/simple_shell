@@ -14,12 +14,12 @@ void handle_args(char **lineptr, char **args)
 {
 	char *token;
 
-	token = strtok(*lineptr, " \n");
+	token = strtok(*lineptr, " \n	");
 	while (token != NULL)
 	{
 		*args = token;
 		args++;
-		token = strtok(NULL, " \n");
+		token = strtok(NULL, " \n	");
 	}
 	*args = NULL;
 }
