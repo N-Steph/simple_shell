@@ -19,7 +19,7 @@ struct dir_node
 	struct dir_node *next;
 };
 void handle_args(char **lineptr, char **agrs);
-int handle_path(char **agrs);
+int handle_path(char **agrs, int *output_num);
 struct dir_node *linked_list_dir_path(void);
 void free_list(struct dir_node *head);
 int built_in(char **args, char *lineptr);
