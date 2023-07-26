@@ -50,8 +50,10 @@ void interactive_mode(char **lineptr, char **argv, int *output_num)
 	int status, i;
 	char *in_command;
 
-	in_command = argv[0];
 	handle_args(lineptr, argv);
+	in_command = argv[0];
+	if (argv[0] == NULL)
+		return;
 	i = built_in(argv, *lineptr);
 	if (i == -1)
 		return;
