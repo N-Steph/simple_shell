@@ -10,7 +10,7 @@
  */
 void built_in(char **args, char *lineptr)
 {
-	char *cmd_built_in[2] = {"exit", "env"};
+	char *cmd_built_in[2] = {"exit", "env", "setenv", "unsetenv"};
 	int status;
 
 	if (strcmp(args[0], cmd_built_in[0]) == 0)
@@ -33,7 +33,7 @@ void built_in(char **args, char *lineptr)
 			exit(status);
 		}
 	}
-	else if (strcmp(args[0], cmd_built_in[0]) == 0)
+	else if (strcmp(args[0], cmd_built_in[1]) == 0)
 	{
 		_printenv();
 	}
