@@ -6,7 +6,7 @@
  * @args: array of arguments
  * @lineptr: pointer to buffer of argument read by getline()
  *
- * Return: -1 (failure) 
+ * Return: -1 (failure)
  */
 int built_in(char **args, char *lineptr)
 {
