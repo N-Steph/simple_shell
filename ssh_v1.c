@@ -55,7 +55,7 @@ void interactive_mode(char **lineptr, char **argv, int *output_num)
 	if (argv[0] == NULL)
 		return;
 	i = built_in(argv, *lineptr);
-	if (i == -1)
+	if (i == -1 || i == 1)
 		return;
 	i = handle_path(argv, output_num);
 	if (i == -1)
