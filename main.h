@@ -13,6 +13,11 @@ extern char **environ;
 int _strlen(const char *s);
 void print_dir_path(void);
 char *_getenv(const char *name);
+/**
+ * struct dir_node - Structure of a node in a linked list
+ * @dir: pointer to string
+ * @next: pointer to next node
+ */
 struct dir_node
 {
 	char *dir;
@@ -26,4 +31,6 @@ int built_in(char **args, char *lineptr);
 void _printenv(void);
 void print_error_msg(char *in_command, int *output_num);
 void interactive_mode(char **lineptr, char **argv, int *output_num);
+int _unsetenv(const char *name);
+int _setenv(const char *name, const char *value, int overwrite);
 #endif /* MAIN_H */
