@@ -27,18 +27,25 @@ int built_in(char **args, char *lineptr)
 			{
 				printf("hsh : 1 : Illegal number : %s\n", args[1]);
 				return (-1);
-				/*free(lineptr);*/
-				/*exit(2);*/
 			}
 			free(lineptr);
 			exit(status);
 		}
 	}
+	else if (strcmp(args[0], cmd_built_in[2]) == 0)
+	{
+		_setenv(args[1], args[2], 1);
+		return (1);
+	}
+	else if (strcmp(args[0], cmd_built_in[3]) == 0)
+	{
+		_unsetenv(args[1]);
+		return (1);
+	}
 	else if (strcmp(args[0], cmd_built_in[1]) == 0)
 	{
 		/* How do I handle when env is given an argument */
 		return (0);
-		/*_printenv();*/
 	}
 	return (0);
 }
